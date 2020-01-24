@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.13)
+
+# projects
+project(game_of_life C CXX)
+
+set(CMAKE_CXX_STANDARD 14)
+
+# prepare build environment
+file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h")
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+target_link_libraries(${PROJECT_NAME}
+        boost_system
+        boost_date_time)
+
+add_test_targets()
