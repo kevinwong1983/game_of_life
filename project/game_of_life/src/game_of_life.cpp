@@ -2,14 +2,16 @@
 #include <algorithm>
 
 #include "game_of_life.h"
+#include "matrix.h"
 #include "rules.h"
 
-game_of_life::game_of_life(int rows, int columns):matrix_(std::make_shared<matrix>(rows, columns)) {
-    rules::populate(matrix_);
+GameOfLife::GameOfLife(int rows, int columns, std::shared_ptr<StateDispatcher> state_dispatch) {
+    matrix_ = std::make_shared<Matrix>(rows, columns, state_dispatch);
+    Rules::populate(matrix_);
+    matrix_->print();
 };
 
-void game_of_life::PublishHandler() {
-    std::cout << "handle" << std::endl;
-    rules::apply(matrix_);
+void GameOfLife::on_publish() {
+    Rules::apply(matrix_);
     matrix_->print();
 }

@@ -2,5 +2,5 @@
 
 class Publishable {
 public:
-    virtual void PublishHandler() = 0;
+    virtual void on_publish() = 0;
 };

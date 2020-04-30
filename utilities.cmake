@@ -3,7 +3,9 @@ function(add_test_targets)
     include(GoogleTest)
     if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/test/CMakeLists.txt")
         set(TEST_PROJECT_NAME ${PROJECT_NAME}_unit_tests)
-        add_subdirectory(test)
+        add_subdirectory(
+                test
+                test/mock)
     endif (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/test/CMakeLists.txt")
 endfunction(add_test_targets)
 

@@ -2,12 +2,13 @@
 
 #include <iostream>
 #include "cell.h"
+#include "state_dispatcher.h"
 
 using cell_matrix = std::vector<std::vector<Cell>>;
 
-class matrix {
+class Matrix {
 public:
-    matrix(int rows, int columns);
+    Matrix(int rows, int columns, std::shared_ptr<StateDispatcher> state_dispatch);
     void print() const;
     int getRowSize() const;
     int getColumnSize() const;

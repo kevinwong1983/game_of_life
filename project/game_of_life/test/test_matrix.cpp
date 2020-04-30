@@ -1,22 +1,37 @@
 #include <iostream>
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
+
+#include "mock/mock_state_dispatcher.h"
 #include "matrix.h"
 
 using namespace std;
 
-TEST(matrix_test, test) {
+class MatrixTest : public testing::Test {
+public:
+    void SetUp(){
+        state_dispatcher_mock = std::make_shared<StateDispatcherMock>();
+    }
+    void TearDown(){
+
+    }
+    std::shared_ptr<StateDispatcherMock> state_dispatcher_mock;
+};
+
+TEST_F(MatrixTest, test) {
     EXPECT_EQ(1, 1);
 }
 
-TEST(matrix_test, print) {
-    matrix m(5,10);
+TEST_F(MatrixTest, print) {
+
+    Matrix m(5, 10, state_dispatcher_mock);
     m.print();
 }
 
-TEST(matrix_test, state_of_cells_after_init_should_be_false) {
+TEST_F(MatrixTest, state_of_cells_after_init_should_be_false) {
     int row = 5;
     int column = 10;
-    matrix m(row, column);
+    Matrix m(row, column, state_dispatcher_mock);
 
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < column; j++) {
@@ -45,10 +60,10 @@ TEST(matrix_test, state_of_cells_after_init_should_be_false) {
     EXPECT_EQ(3, (*e)[0][2]);
 }
 
-TEST(matrix_test, state_of_cell_can_be_set) {
+TEST_F(MatrixTest, state_of_cell_can_be_set) {
     int row = 5;
     int column = 10;
-    matrix m(row, column);
+    Matrix m(row, column, state_dispatcher_mock);
     //    0 0 0 0 0 -> rows = x
     //    0 0 0 0 0
     //    0 0 0 0 0
@@ -80,10 +95,10 @@ TEST(matrix_test, state_of_cell_can_be_set) {
 }
 
 
-TEST(matrix_test, mark_and_apply_matrix_for_state_change) {
+TEST_F(MatrixTest, mark_and_apply_matrix_for_state_change) {
     int row = 5;
     int column = 10;
-    matrix m(row, column);
+    Matrix m(row, column, state_dispatcher_mock);
 
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < column; j++) {

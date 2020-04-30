@@ -1,93 +1,96 @@
 #include <vector>
-#include "cell.h"
 #include "matrix.h"
 
-matrix::matrix(int rows, int columns): rows_(rows), columns_(columns){
-    std::vector<std::vector<Cell>> matrix;
-    std::generate_n(std::back_inserter(matrix), columns, [&rows](){
+Matrix::Matrix(int rows, int columns, std::shared_ptr<StateDispatcher> state_dispatch): rows_(rows), columns_(columns){
+    std::vector<std::vector<Cell>> Matrix;
+    std::generate_n(std::back_inserter(Matrix), columns, [state_dispatch, y = 0, &rows]()mutable{
         std::vector<Cell> inner;
-        std::generate_n(std::back_inserter(inner), rows, [](){
-            return Cell(false);
+        std::generate_n(std::back_inserter(inner), rows, [state_dispatch, x = 0, &y]()mutable{
+            auto c = Cell(false, x, y);
+            c.subscribe(state_dispatch);
+            x ++;
+            return c;
         });
+        y ++;
         return inner;
     });
 
-    cell_matrix_ =  std::make_unique<cell_matrix>(std::move(matrix));
+    cell_matrix_ =  std::make_unique<cell_matrix>(std::move(Matrix));
 }
 
-void matrix::print() const {
+void Matrix::print() const {
     std::cout << std::endl << std::endl;
     for (std::vector<Cell>& column: *cell_matrix_) { // columns in matrix
         for (Cell& cell: column) {                   // cell in column
-            std::cout << cell.getState() << " ";
+            std::cout << cell.get_state() << "[" << cell.get_x() << "," << cell.get_y() << "]" << " ";
         }
         std::cout << std::endl;
     }
     std::cout << std::endl;
 }
 
-bool matrix::get(int x, int y) const {
-    return (*cell_matrix_)[x][y].getState();
+bool Matrix::get(int x, int y) const {
+    return (*cell_matrix_)[x][y].get_state();
 }
 
-void matrix::set(int x, int y, bool state) {
-    (*cell_matrix_)[x][y].setState(state);
+void Matrix::set(int x, int y, bool state) {
+    (*cell_matrix_)[x][y].set_state(state);
 }
 
-void matrix::mark(int x, int y, bool state) {
-    (*cell_matrix_)[x][y].markForStateChange(state);
+void Matrix::mark(int x, int y, bool state) {
+    (*cell_matrix_)[x][y].mark_state(state);
 }
 
-void matrix::applyMarked() {
+void Matrix::applyMarked() {
     for (std::vector<Cell>& column: *cell_matrix_) {
         for (Cell& cell: column) {
-            cell.applyStateChange();
+            cell.update();
         }
         std::cout << std::endl;
     }
 }
 
-int matrix::getRowSize() const {
+int Matrix::getRowSize() const {
     return rows_;
 }
 
-int matrix::getColumnSize() const {
+int Matrix::getColumnSize() const {
     return columns_;
 }
 
-bool matrix::isUpperLeft(int x, int y) const {
+bool Matrix::isUpperLeft(int x, int y) const {
     return isUpper(x ,y) && isLeft(x ,y);
 }
 
-bool matrix::isBottomLeft(int x, int y) const {
+bool Matrix::isBottomLeft(int x, int y) const {
     return isBottom(x ,y) && isLeft(x ,y);
 }
 
-bool matrix::isUpperRight(int x, int y) const {
+bool Matrix::isUpperRight(int x, int y) const {
     return isUpper(x ,y) && isRight(x ,y);
 }
 
-bool matrix::isBottomRight(int x, int y) const {
+bool Matrix::isBottomRight(int x, int y) const {
     return isBottom(x ,y) && isRight(x ,y);
 }
 
-bool matrix::isUpper(int x, int y) const {
+bool Matrix::isUpper(int x, int y) const {
     return (y == 0);
 }
 
-bool matrix::isBottom(int x, int y) const {
+bool Matrix::isBottom(int x, int y) const {
     return (y == rows_-1);
 }
 
-bool matrix::isLeft(int x, int y) const {
+bool Matrix::isLeft(int x, int y) const {
     return (x == 0);
 }
 
-bool matrix::isRight(int x, int y) const {
+bool Matrix::isRight(int x, int y) const {
     return  (x == columns_-1);
 }
 
-int matrix::getNeighbours(int x, int y) const {
+int Matrix::getNeighbours(int x, int y) const {
     auto n = 0;
 
     if (this->isUpperLeft(x,y)) {

@@ -3,13 +3,14 @@
 #include <iostream>
 #include <vector>
 #include "cell.h"
+#include "publishable.h"
 #include "matrix.h"
-#include "game_engine.h"
+#include "state_dispatcher.h"
 
-class game_of_life : public Publishable {
+class GameOfLife : public Publishable {
 public:
-    game_of_life(int rows, int columns);
-    void PublishHandler() override;
+    GameOfLife(int rows, int columns, std::shared_ptr<StateDispatcher> state_dispatch);
+    void on_publish() override;
 private:
-    std::shared_ptr<matrix> matrix_;
+    std::shared_ptr<Matrix> matrix_;
 };

@@ -2,7 +2,7 @@
 
 #include "rules.h"
 
-void rules::apply(std::shared_ptr<matrix> m){
+void Rules::apply(std::shared_ptr<Matrix> m){
     auto column = m->getColumnSize();
     auto row = m->getRowSize();
 
@@ -32,18 +32,19 @@ void rules::apply(std::shared_ptr<matrix> m){
     m->applyMarked();
 }
 
-void rules::populate(std::shared_ptr<matrix> m) {
+void Rules::populate(std::shared_ptr<Matrix> m) {
     auto column = m->getColumnSize();
     auto row = m->getRowSize();
+    std::cout << "r: " << row << " c: " << column << std::endl;
 
     std::default_random_engine generator;
     std::uniform_int_distribution<int> distribution(0,1);
     auto live_generator = std::bind(distribution, generator);
 
     for (int x = 0; x < column; x++) {
-        for (int y = 0; y < column; y++) {
+        for (int y = 0; y < row; y++) {
             bool is_alive = live_generator()?true:false;
-            m->set(x,y,is_alive);
+            m->set(x, y, is_alive);
         }
     }
 }

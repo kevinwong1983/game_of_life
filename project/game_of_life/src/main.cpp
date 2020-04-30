@@ -1,14 +1,23 @@
 #include <iostream>
 #include "game_of_life.h"
+#include "engine.h"
+#include "state_dispatcher_impl.h"
+#include <boost/asio.hpp>
 
 int main() {
     boost::asio::io_context ioc;
-    auto refresh_rate = boost::asio::chrono::seconds(1);
-    auto rows = 10;
-    auto columns = 10;
-    game_engine engine(ioc, refresh_rate);
-    auto temp_game_of_life = std::make_shared<game_of_life>(rows, columns);
-    engine.subscribe(temp_game_of_life);
+
+    const std::string id = "game_of_life";
+    std::string ip = "127.0.0.1";
+    int port = 1883;
+    int row = 10;
+    int column = 11;
+    auto seconds = boost::asio::chrono::seconds(1);
+
+    auto state_dispatch = std::make_shared<StateDispatcherImpl>(ioc, id, ip, port);
+    auto gol = std::make_shared<GameOfLife>(row, column, state_dispatch);
+    Engine engine(ioc, seconds);
+    engine.subscribe(gol);
 
     ioc.run();
 
