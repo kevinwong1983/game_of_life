@@ -1,20 +1,264 @@
-//#include "boost/variant.hpp"
-//#include <iostream>
-//#include <gtest/gtest.h>
-//#include <boost/asio.hpp>
-//#include <time.h>
-//#include <boost/date_time/posix_time/posix_time.hpp>
-//#include <boost/system/system_error.hpp>
-//#include <functional>
-//#include <unordered_map>
-//
-//#include "mosquitto_mqtt_client.h"
-//#include "mqtt_publish_options.h"
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <unistd.h>
-//#include <sys/types.h>
-//
+/*******************************************************************************
+Copyright (C) 2019 Signify Holding
+All Rights Reserved.
+********************************************************************************/
+
+#include <gtest/gtest.h>
+
+#include <boost/asio.hpp>
+#include <thread>
+#include <future>
+
+#include "mosquitto_mqtt_client.h"
+
+class TestMqttClient : public testing::Test {
+  public:
+  void SetUp() {
+    fire_up_mosquitto_broker();
+  }
+  void TearDown(){
+    shut_down_mosquitto_broker();
+  }
+  private:
+  void fire_up_mosquitto_broker() {
+    if ((process_id_ = fork()) == 0) {
+      char app[] = "/usr/sbin/mosquitto";
+      char * const argv[] = { app, NULL };
+      execv (app, argv);
+    }
+    sleep(1);
+  }
+  void shut_down_mosquitto_broker() {
+    std::string command = "kill -9 " + std::to_string(process_id_);
+    system (command.c_str());
+  }
+  pid_t process_id_;
+};
+
+TEST_F(TestMqttClient, mqtt_client_can_subscribe_and_publish) {
+  // given connected mqtt client A.
+  boost::asio::io_context ioc;
+  auto work = std::make_unique<boost::asio::io_context::work>(ioc);
+  auto mqtt_client = std::make_unique<MosquittoMqttClient>("127.0.0.1", 1883, "hello", ioc);
+
+  // and mqtt client A subscribed to topic "hello/world".
+  int number_of_messages_received = 0;
+  auto connection = mqtt_client->Subscribe("hello/world", [&number_of_messages_received, &work](const Topic& t, const Message& m) {
+    EXPECT_EQ(m, "HELLO WORLD 1234");
+    EXPECT_EQ(t, "hello/world");
+    number_of_messages_received ++;
+    work.reset();
+  });
+
+  // when mqtt client A publishes to "hello/world".
+  mqtt_client->Publish("hello/world", "HELLO WORLD 1234");
+  ioc.run();
+
+  // then published message received by subscriber.
+  EXPECT_EQ(number_of_messages_received, 1);
+}
+
+TEST_F(TestMqttClient, mqtt_client_can_subscribe_and_publish_after_ioc_run) {
+  // given ioc run
+  boost::asio::io_context ioc;
+  auto work = std::make_unique<boost::asio::io_context::work>(ioc);
+  auto t = std::thread([&ioc](){
+    ioc.run();
+  });
+
+  // given connected mqtt client A.
+  auto mqtt_client = std::make_unique<MosquittoMqttClient>("127.0.0.1", 1883, "hello", ioc);
+
+  // when mqtt client A subscribes to "hello/world".
+  int number_of_messages_received = 0;
+  mqtt_client->Subscribe("hello/world", [&number_of_messages_received, &work](const Topic& t, const Message& m) {
+    EXPECT_EQ(m, "HELLO WORLD");
+    EXPECT_EQ(t, "hello/world");
+    number_of_messages_received ++;
+    work.reset();
+  });
+
+  // and mqtt client A publishes to "hello/world".
+  mqtt_client->Publish("hello/world", "HELLO WORLD");
+
+  // then published message received by subscriber.
+  t.join();
+  EXPECT_EQ(number_of_messages_received, 1);
+}
+
+TEST_F(TestMqttClient, mqtt_client_can_have_multiple_subscriptions_on_same_topic) {
+  // given connected mqtt client A.
+  boost::asio::io_context ioc;
+  auto work = std::make_unique<boost::asio::io_context::work>(ioc);
+  auto mqtt_client = std::make_unique<MosquittoMqttClient>("127.0.0.1", 1883, "hello", ioc);
+
+  int number_of_messages_received = 0;
+  auto subscribe_handler = [&number_of_messages_received, &work](const Topic& t, const Message& m) {
+    EXPECT_EQ(m, "HELLO WORLD");
+    EXPECT_EQ(t, "hello/world");
+    number_of_messages_received ++;
+    if (number_of_messages_received == 3) work.reset();
+  };
+  // and mqtt client A subscribed to "hello/world".
+  mqtt_client->Subscribe("hello/world", subscribe_handler);
+  mqtt_client->Subscribe("hello/world", subscribe_handler);
+  mqtt_client->Subscribe("hello/world", subscribe_handler);
+
+  // when mqtt client A publishes to "hello/world".
+  mqtt_client->Publish("hello/world", "HELLO WORLD");
+
+  // then published message received by subscriber.
+  ioc.run();
+  EXPECT_EQ(number_of_messages_received, 3);
+}
+
+TEST_F(TestMqttClient, mqtt_client_can_have_multiple_publications_on_same_topic) {
+  // given connected mqtt client A.
+  boost::asio::io_context ioc;
+  auto work = std::make_unique<boost::asio::io_context::work>(ioc);
+  auto mqtt_client = std::make_unique<MosquittoMqttClient>("127.0.0.1", 1883, "hello", ioc);
+
+  auto messages = std::vector <std::string>();
+  auto subscribe_handler =  [&messages, &work](const Topic& t, const Message& m) {
+    messages.emplace_back(m);
+    EXPECT_EQ(t, "hello/world");
+    if (messages.size() == 3) work.reset();
+  };
+  // and mqtt client A subscribed to "hello/world".
+  mqtt_client->Subscribe("hello/world", subscribe_handler);
+
+  // when mqtt client A publishes to "hello/world".
+  mqtt_client->Publish("hello/world", "HELLO WORLD 1");
+  mqtt_client->Publish("hello/world", "HELLO WORLD 2");
+  mqtt_client->Publish("hello/world", "HELLO WORLD 3");
+
+  // then all published messages received by subscriber.
+  ioc.run();
+  EXPECT_EQ(3, messages.size());
+  EXPECT_EQ(1, std::count_if(begin(messages), end(messages), [](std::string message){return message.compare("HELLO WORLD 1") == 0;}));
+  EXPECT_EQ(1, std::count_if(begin(messages), end(messages), [](std::string message){return message.compare("HELLO WORLD 2") == 0;}));
+  EXPECT_EQ(1, std::count_if(begin(messages), end(messages), [](std::string message){return message.compare("HELLO WORLD 3") == 0;}));
+}
+
+TEST_F(TestMqttClient, mqtt_client_A_can_subscribe_to_mqtt_publication_from_client_B) {
+  // given connected mqtt client A and B.
+  boost::asio::io_context ioc;
+  auto work = std::make_unique<boost::asio::io_context::work>(ioc);
+  auto mqtt_client_a = std::make_unique<MosquittoMqttClient>("127.0.0.1", 1883, "hello1", ioc);
+  auto mqtt_client_b = std::make_unique<MosquittoMqttClient>("127.0.0.1", 1883, "hello2", ioc);
+
+  // and mqtt client A subscribed to "hello/world".
+  int number_of_messages_received = 0;
+  mqtt_client_a->Subscribe("hello/world", [&number_of_messages_received, &work](const Topic& t, const Message& m) {
+    EXPECT_EQ(m, "HELLO WORLD");
+    EXPECT_EQ(t, "hello/world");
+    number_of_messages_received ++;
+    work.reset();
+  });
+
+  // when mqtt client B publishes to "hello/world".
+  mqtt_client_b->Publish("hello/world", "HELLO WORLD");
+
+  // then published message received by subscriber.
+  ioc.run();
+  EXPECT_EQ(number_of_messages_received, 1);
+}
+
+TEST_F(TestMqttClient, mqtt_client_can_subscribe_and_publish_with_single_level_wild_card) {
+  // given connected mqtt client A.
+  boost::asio::io_context ioc;
+  auto work = std::make_unique<boost::asio::io_context::work>(ioc);
+  auto mqtt_client = std::make_unique<MosquittoMqttClient>("127.0.0.1", 1883, "hello", ioc);
+
+  // and mqtt client A subscribed to topic with single level wildcard".
+  int number_of_messages_received = 0;
+  mqtt_client->Subscribe("hello/+/world", [&number_of_messages_received, &work](const Topic& t, const Message& m) {
+    EXPECT_EQ(m, "HELLO WORLD");
+    EXPECT_EQ(t, "hello/id/world");
+    number_of_messages_received ++;
+    work.reset();
+  });
+
+  // when mqtt client A publishes to "hello/id/world".
+  mqtt_client->Publish("hello/id/world", "HELLO WORLD");
+
+  // then published message received by subscriber.
+  ioc.run();
+  EXPECT_EQ(number_of_messages_received, 1);
+}
+
+TEST_F(TestMqttClient, mqtt_client_can_subscribe_and_publish_with_multiple_single_level_wild_cards) {
+  // given connected mqtt client A.
+  boost::asio::io_context ioc;
+  auto work = std::make_unique<boost::asio::io_context::work>(ioc);
+  auto mqtt_client = std::make_unique<MosquittoMqttClient>("127.0.0.1", 1883, "hello", ioc);
+
+  // and mqtt client A subscribed to topic with multiple single level wildcards".
+  int number_of_messages_received = 0;
+  mqtt_client->Subscribe("hello/+/+/world", [&number_of_messages_received, &work](const Topic& t, const Message& m) {
+    EXPECT_EQ(m, "HELLO WORLD");
+    EXPECT_EQ(t, "hello/id1/id2/world");
+    number_of_messages_received ++;
+    work.reset();
+  });
+
+  // when mqtt client A publishes to "hello/id/world".
+  mqtt_client->Publish("hello/id1/id2/world", "HELLO WORLD");
+
+  // then published message received by subscriber.
+  ioc.run();
+  EXPECT_EQ(number_of_messages_received, 1);
+}
+
+TEST_F(TestMqttClient, mqtt_client_can_subscribe_and_publish_with_multi_level_wild_card) {
+  // given connected mqtt client A.
+  boost::asio::io_context ioc;
+  auto work = std::make_unique<boost::asio::io_context::work>(ioc);
+  auto mqtt_client = std::make_unique<MosquittoMqttClient>("127.0.0.1", 1883, "hello", ioc);
+
+  // and mqtt client A subscribed to topic with multi level wildcard".
+  int number_of_messages_received = 0;
+  mqtt_client->Subscribe("hello/#", [&number_of_messages_received, &work](const Topic& t, const Message& m) {
+    EXPECT_EQ(m, "HELLO WORLD");
+    EXPECT_EQ(t, "hello/id/world");
+    number_of_messages_received ++;
+    work.reset();
+  });
+
+  // when mqtt client A publishes to "hello/id/world".
+  mqtt_client->Publish("hello/id/world", "HELLO WORLD");
+
+  // then published message received by subscriber.
+  ioc.run();
+  EXPECT_EQ(number_of_messages_received, 1);
+}
+
+TEST_F(TestMqttClient, mqtt_client_can_unsubscribe) {
+  // given connected mqtt client A.
+  boost::asio::io_context ioc;
+  auto work = std::make_unique<boost::asio::io_context::work>(ioc);
+  auto mqtt_client = std::make_unique<MosquittoMqttClient>("127.0.0.1", 1883, "hello", ioc);
+
+  // and mqtt client A subscribed to topic "hello/world".
+  int number_of_messages_received = 0;
+  auto connection = mqtt_client->Subscribe("hello/world", [&number_of_messages_received, &work](const Topic& t, const Message& m) {
+    EXPECT_TRUE(false);
+  });
+
+  // and mqtt client A unsubscribed from topic "hello/world".
+  mqtt_client->Unsubscribe("hello/world");
+
+  // when mqtt client A publishes to "hello/world".
+  mqtt_client->Publish("hello/world", "HELLO WORLD 1234");
+
+  // then mqtt client A should not receive message
+  boost::asio::steady_timer timer(ioc, boost::asio::chrono::seconds(1));
+  timer.async_wait(std::bind([&work]() {
+    work.reset();
+  }));
+  ioc.run();
+}
+
 //class MqttTest : public testing::Test {
 //public:
 //    void SetUp(){

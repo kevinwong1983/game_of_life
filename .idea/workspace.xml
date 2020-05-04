@@ -13,30 +13,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53fe8b2-da25-49a1-ae18-ca5a83ac9239" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/algorithm.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/callback.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/connection.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/message.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/mosquitto_mqtt_client.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/mosquitto_mqtt_client.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/non-copyable-base.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/non_copyable_base.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/sink.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/topic.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FindMosquitto.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/findmosquitto.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/game_of_life/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/InstallRedboltz.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/mqtt_client.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/mqtt_client.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/mqtt_client.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/mqtt_publish_options.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/mqtt_publish_options.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/mqtt_publish_options.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/mqtt_publish_options.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher_impl.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher_impl.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher_impl.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher_impl.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/game_of_life/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/test/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/game_of_life/test/test_mqtt.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/test/test_mqtt.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/test/test_mqtt_subscribe_options.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/test/test_mqtt_subscribe_options.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/utilities.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,13 +40,15 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CMakeLists.txt" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -80,51 +64,51 @@
       <recent name="$PROJECT_DIR$/project/game_of_life/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Google Test.MqttTest.mqtt_client_can_subscribe_and_publish">
-    <configuration name="MqttTest" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game of life" TARGET_NAME="game_of_life_unit_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="game of life" RUN_TARGET_NAME="game_of_life_unit_tests" TEST_CLASS="MqttTest" TEST_MODE="SUITE_TEST">
+  <component name="RunManager" selected="Google Test.CellTest">
+    <configuration name="CellTest" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game of life" TARGET_NAME="game_of_life_unit_tests" RUN_TARGET_PROJECT_NAME="game of life" RUN_TARGET_NAME="game_of_life_unit_tests" TEST_CLASS="CellTest" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MqttTest.mqtt_client_can_subscribe_and_publish" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game of life" TARGET_NAME="game_of_life_unit_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="game of life" RUN_TARGET_NAME="game_of_life_unit_tests" TEST_CLASS="MqttTest" TEST_METHOD="mqtt_client_can_subscribe_and_publish" TEST_MODE="SUITE_TEST">
+    <configuration name="MatrixTest" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game of life" TARGET_NAME="game_of_life_unit_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="game of life" RUN_TARGET_NAME="game_of_life_unit_tests" TEST_CLASS="MatrixTest" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MqttTest.mqtt_client_can_subscribe_and_publish_after_ioc_run" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game of life" TARGET_NAME="game_of_life_unit_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="game of life" RUN_TARGET_NAME="game_of_life_unit_tests" TEST_CLASS="MqttTest" TEST_METHOD="mqtt_client_can_subscribe_and_publish_after_ioc_run" TEST_MODE="SUITE_TEST">
+    <configuration name="RuleTest" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game of life" TARGET_NAME="game_of_life_unit_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="game of life" RUN_TARGET_NAME="game_of_life_unit_tests" TEST_CLASS="RuleTest" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MqttTest.mqtt_client_received_persistent_messages_after_subscribe" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game of life" TARGET_NAME="game_of_life_unit_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="game of life" RUN_TARGET_NAME="game_of_life_unit_tests" TEST_CLASS="MqttTest" TEST_METHOD="mqtt_client_received_persistent_messages_after_subscribe" TEST_MODE="SUITE_TEST">
+    <configuration name="StateDispatcher.constructor" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game of life" TARGET_NAME="game_of_life_unit_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="game of life" RUN_TARGET_NAME="game_of_life_unit_tests" TEST_CLASS="StateDispatcher" TEST_METHOD="constructor" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MqttTest.mqtt_client_receives_persistent_messages_after_subscribe" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game of life" TARGET_NAME="game_of_life_unit_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="game of life" RUN_TARGET_NAME="game_of_life_unit_tests" TEST_CLASS="MqttTest" TEST_METHOD="mqtt_client_receives_persistent_messages_after_subscribe" TEST_MODE="SUITE_TEST">
+    <configuration name="TestMqttClient" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game of life" TARGET_NAME="game_of_life_unit_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="game of life" RUN_TARGET_NAME="game_of_life_unit_tests" TEST_CLASS="TestMqttClient" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Google Test.MqttTest" />
-      <item itemvalue="Google Test.MqttTest.mqtt_client_can_subscribe_and_publish" />
-      <item itemvalue="Google Test.MqttTest.mqtt_client_can_subscribe_and_publish_after_ioc_run" />
-      <item itemvalue="Google Test.MqttTest.mqtt_client_received_persistent_messages_after_subscribe" />
-      <item itemvalue="Google Test.MqttTest.mqtt_client_receives_persistent_messages_after_subscribe" />
+      <item itemvalue="Google Test.MatrixTest" />
+      <item itemvalue="Google Test.RuleTest" />
+      <item itemvalue="Google Test.StateDispatcher.constructor" />
+      <item itemvalue="Google Test.TestMqttClient" />
+      <item itemvalue="Google Test.CellTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Google Test.MqttTest.mqtt_client_can_subscribe_and_publish" />
-        <item itemvalue="Google Test.MqttTest.mqtt_client_receives_persistent_messages_after_subscribe" />
-        <item itemvalue="Google Test.MqttTest.mqtt_client_received_persistent_messages_after_subscribe" />
-        <item itemvalue="Google Test.MqttTest.mqtt_client_can_subscribe_and_publish_after_ioc_run" />
-        <item itemvalue="Google Test.MqttTest" />
+        <item itemvalue="Google Test.CellTest" />
+        <item itemvalue="Google Test.TestMqttClient" />
+        <item itemvalue="Google Test.StateDispatcher.constructor" />
+        <item itemvalue="Google Test.RuleTest" />
+        <item itemvalue="Google Test.MatrixTest" />
       </list>
     </recent_temporary>
   </component>
@@ -164,6 +148,10 @@
       <workItem from="1588322207978" duration="2467000" />
       <workItem from="1588339335824" duration="1928000" />
       <workItem from="1588597528535" duration="3796000" />
+      <workItem from="1588612159466" duration="7883000" />
+      <workItem from="1588631798755" duration="95000" />
+      <workItem from="1588631896642" duration="10000" />
+      <workItem from="1588631930647" duration="1187000" />
     </task>
     <servers />
   </component>
@@ -177,45 +165,62 @@
     </todo-panel>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="537" y="222" key="#MqttTest.mqtt_client_can_subscribe_and_publish" timestamp="1588600361380">
-      <screen x="0" y="23" width="1680" height="979" />
+    <state x="547" y="263" width="642" height="557" key="#CellTest" timestamp="1588631594218">
+      <screen x="67" y="27" width="1613" height="1023" />
+    </state>
+    <state x="547" y="263" width="642" height="557" key="#CellTest/67.27.1613.1023@67.27.1613.1023" timestamp="1588631594218" />
+    <state x="547" y="261" width="642" height="557" key="#MatrixTest.test" timestamp="1588631420743">
+      <screen x="67" y="27" width="1613" height="1023" />
+    </state>
+    <state x="547" y="261" width="642" height="557" key="#MatrixTest.test/67.27.1613.1023@67.27.1613.1023" timestamp="1588631420743" />
+    <state x="583" y="235" width="642" height="561" key="#MqttTest.mqtt_client_can_subscribe_and_publish" timestamp="1588626738246">
+      <screen x="67" y="27" width="1613" height="1023" />
     </state>
     <state x="537" y="222" key="#MqttTest.mqtt_client_can_subscribe_and_publish/0.23.1680.979@0.23.1680.979" timestamp="1588600361380" />
+    <state x="583" y="235" width="642" height="561" key="#MqttTest.mqtt_client_can_subscribe_and_publish/67.27.1613.1023@67.27.1613.1023" timestamp="1588626738246" />
     <state x="446" y="222" key="#MqttTest.mqtt_client_received_persistent_messages_after_subscribe" timestamp="1588157914330">
       <screen x="0" y="23" width="1680" height="972" />
     </state>
     <state x="446" y="222" key="#MqttTest.mqtt_client_received_persistent_messages_after_subscribe/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588157914329" />
-    <state width="1638" height="454" key="GridCell.Tab.0.bottom" timestamp="1588319213592">
-      <screen x="0" y="23" width="1680" height="979" />
+    <state x="696" y="280" width="424" height="484" key="FileChooserDialogImpl" timestamp="1588632955863">
+      <screen x="67" y="27" width="1613" height="1023" />
+    </state>
+    <state x="696" y="280" width="424" height="484" key="FileChooserDialogImpl/67.27.1613.1023@67.27.1613.1023" timestamp="1588632955863" />
+    <state width="1567" height="260" key="GridCell.Tab.0.bottom" timestamp="1588633118096">
+      <screen x="67" y="27" width="1613" height="1023" />
     </state>
     <state width="1878" height="227" key="GridCell.Tab.0.bottom/0.23.1680.972/-125.-1080.1920.1080@-125.-1080.1920.1080" timestamp="1588168025371" />
     <state width="1638" height="266" key="GridCell.Tab.0.bottom/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588157963374" />
     <state width="1638" height="454" key="GridCell.Tab.0.bottom/0.23.1680.972@0.23.1680.972" timestamp="1588198406243" />
     <state width="1638" height="454" key="GridCell.Tab.0.bottom/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213592" />
-    <state width="1638" height="454" key="GridCell.Tab.0.center" timestamp="1588319213590">
-      <screen x="0" y="23" width="1680" height="979" />
+    <state width="1567" height="260" key="GridCell.Tab.0.bottom/67.27.1613.1023@67.27.1613.1023" timestamp="1588633118096" />
+    <state width="1567" height="260" key="GridCell.Tab.0.center" timestamp="1588633118096">
+      <screen x="67" y="27" width="1613" height="1023" />
     </state>
     <state width="1878" height="227" key="GridCell.Tab.0.center/0.23.1680.972/-125.-1080.1920.1080@-125.-1080.1920.1080" timestamp="1588168025370" />
     <state width="1638" height="266" key="GridCell.Tab.0.center/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588157963373" />
     <state width="1638" height="454" key="GridCell.Tab.0.center/0.23.1680.972@0.23.1680.972" timestamp="1588198406242" />
     <state width="1638" height="454" key="GridCell.Tab.0.center/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213590" />
-    <state width="1638" height="454" key="GridCell.Tab.0.left" timestamp="1588319213590">
-      <screen x="0" y="23" width="1680" height="979" />
+    <state width="1567" height="260" key="GridCell.Tab.0.center/67.27.1613.1023@67.27.1613.1023" timestamp="1588633118096" />
+    <state width="1567" height="260" key="GridCell.Tab.0.left" timestamp="1588633118095">
+      <screen x="67" y="27" width="1613" height="1023" />
     </state>
     <state width="1878" height="227" key="GridCell.Tab.0.left/0.23.1680.972/-125.-1080.1920.1080@-125.-1080.1920.1080" timestamp="1588168025369" />
     <state width="1638" height="266" key="GridCell.Tab.0.left/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588157963372" />
     <state width="1638" height="454" key="GridCell.Tab.0.left/0.23.1680.972@0.23.1680.972" timestamp="1588198406241" />
     <state width="1638" height="454" key="GridCell.Tab.0.left/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213590" />
-    <state width="1638" height="454" key="GridCell.Tab.0.right" timestamp="1588319213591">
-      <screen x="0" y="23" width="1680" height="979" />
+    <state width="1567" height="260" key="GridCell.Tab.0.left/67.27.1613.1023@67.27.1613.1023" timestamp="1588633118095" />
+    <state width="1567" height="260" key="GridCell.Tab.0.right" timestamp="1588633118096">
+      <screen x="67" y="27" width="1613" height="1023" />
     </state>
     <state width="1878" height="227" key="GridCell.Tab.0.right/0.23.1680.972/-125.-1080.1920.1080@-125.-1080.1920.1080" timestamp="1588168025371" />
     <state width="1638" height="266" key="GridCell.Tab.0.right/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588157963373" />
     <state width="1638" height="454" key="GridCell.Tab.0.right/0.23.1680.972@0.23.1680.972" timestamp="1588198406243" />
     <state width="1638" height="454" key="GridCell.Tab.0.right/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213591" />
+    <state width="1567" height="260" key="GridCell.Tab.0.right/67.27.1613.1023@67.27.1613.1023" timestamp="1588633118096" />
     <state width="1638" height="454" key="GridCell.Tab.1.bottom" timestamp="1588319213593">
       <screen x="0" y="23" width="1680" height="979" />
     </state>
@@ -244,19 +249,25 @@
     <state width="1638" height="200" key="GridCell.Tab.1.right/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588151763917" />
     <state width="1638" height="454" key="GridCell.Tab.1.right/0.23.1680.972@0.23.1680.972" timestamp="1588198406244" />
     <state width="1638" height="454" key="GridCell.Tab.1.right/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213593" />
-    <state x="349" y="148" key="SettingsEditor" timestamp="1588597782518">
-      <screen x="0" y="23" width="1680" height="980" />
+    <state x="402" y="157" key="SettingsEditor" timestamp="1588633067702">
+      <screen x="67" y="27" width="1613" height="1023" />
     </state>
     <state x="349" y="148" key="SettingsEditor/0.23.1680.980@0.23.1680.980" timestamp="1588597782518" />
+    <state x="402" y="157" key="SettingsEditor/67.27.1613.1023@67.27.1613.1023" timestamp="1588633067702" />
     <state x="208" y="-992" width="1288" height="772" key="dock-window-1" timestamp="1588144640243">
       <screen x="-125" y="-1080" width="1920" height="1080" />
     </state>
     <state x="208" y="-992" width="1288" height="772" key="dock-window-1/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588144640243" />
-    <state x="541" y="266" width="598" height="487" key="find.popup" timestamp="1588611753450">
-      <screen x="0" y="23" width="1680" height="979" />
+    <state x="586" y="281" width="863" height="586" key="find.popup" timestamp="1588632410654">
+      <screen x="67" y="27" width="1613" height="1023" />
     </state>
     <state x="541" y="266" width="598" height="486" key="find.popup/0.23.1680.977/-125.-1080.1920.1080@0.23.1680.977" timestamp="1588237266557" />
     <state x="541" y="266" width="598" height="487" key="find.popup/0.23.1680.979@0.23.1680.979" timestamp="1588611753450" />
+    <state x="586" y="281" width="863" height="586" key="find.popup/67.27.1613.1023@67.27.1613.1023" timestamp="1588632410654" />
+    <state x="536" y="250" width="672" height="678" key="search.everywhere.popup" timestamp="1588632366158">
+      <screen x="67" y="27" width="1613" height="1023" />
+    </state>
+    <state x="536" y="250" width="672" height="678" key="search.everywhere.popup/67.27.1613.1023@67.27.1613.1023" timestamp="1588632366158" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -288,17 +299,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/project/game_of_life/test/test_mqtt.cpp</url>
-          <line>354</line>
+          <line>598</line>
           <option name="timeStamp" value="133" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/project/game_of_life/test/test_mqtt.cpp</url>
-          <line>349</line>
+          <line>593</line>
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/project/game_of_life/test/test_mqtt.cpp</url>
-          <line>60</line>
+          <line>304</line>
           <option name="timeStamp" value="152" />
         </line-breakpoint>
       </breakpoints>

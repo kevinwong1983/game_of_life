@@ -6,8 +6,10 @@ list(REMOVE_ITEM SOURCES
         )
 
 add_test_project()
+
 target_include_directories(${TEST_PROJECT_NAME}
         PUBLIC
         ${EXTERNAL_INSTALL_LOCATION}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/../src
+        ${MOSQUITTO_INCLUDE_DIR}
         )
