@@ -2,7 +2,7 @@
 
 #include <boost/asio.hpp>
 #include "state_dispatcher.h"
-#include "mqtt_client.h"
+#include "mosquitto_mqtt_client.h"
 
 class StateDispatcherImpl : public StateDispatcher {
 public:

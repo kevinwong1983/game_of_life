@@ -4,7 +4,6 @@
     <generated>
       <config projectName="game of life" targetName="game_of_life_unit_tests" />
       <config projectName="game of life" targetName="game_of_life" />
-      <config projectName="game of life" targetName="redboltz" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -14,48 +13,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53fe8b2-da25-49a1-ae18-ca5a83ac9239" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/FindMosquitto.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/InstallRedboltz.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/engine.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/engine.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/markable.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/mqtt_client.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/mqtt_client.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/mqtt_publish_options.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/mqtt_publish_options.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/publishable_with_context.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher_impl.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher_impl.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/test/mock/mock_state_dispatcher.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/test/test_engine.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/test/test_mqtt.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/test/test_mqtt_subscribe_options.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/game_of_life/test/test_state_dispatcher.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/algorithm.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/callback.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/connection.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/message.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/mosquitto_mqtt_client.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/mosquitto_mqtt_client.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/non-copyable-base.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/non_copyable_base.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/sink.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/game_of_life/src/topic.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/game_of_life/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/cell.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/cell.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/cell.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/cell.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/game_engine.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/game_engine.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/game_of_life.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/game_of_life.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/game_of_life.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/game_of_life.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/matrix.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/matrix.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/matrix.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/matrix.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/publishable.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/publishable.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/rules.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/rules.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/rules.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/rules.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/game_of_life/InstallRedboltz.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/mqtt_client.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/mqtt_client.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/mqtt_client.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/mqtt_publish_options.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/mqtt_publish_options.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/mqtt_publish_options.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/mqtt_publish_options.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher_impl.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher_impl.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher_impl.h" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/src/state_dispatcher_impl.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/game_of_life/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/test/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/test/test_cell.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/test/test_cell.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/test/test_game_engine.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/test/test_game_of_life.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/test/test_game_of_life.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/test/test_matrix.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/game_of_life/test/test_rules.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/utilities.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/game_of_life/test/test_mqtt.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/test/test_mqtt.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/game_of_life/test/test_mqtt_subscribe_options.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/project/game_of_life/test/test_mqtt_subscribe_options.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +64,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="dynamic.analysis.tools.valgrind" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -130,18 +111,12 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="redboltz" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="game of life" TARGET_NAME="redboltz" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <list>
-      <item itemvalue="CMake Application.redboltz" />
-      <item itemvalue="Google Test.MqttTest.mqtt_client_received_persistent_messages_after_subscribe" />
       <item itemvalue="Google Test.MqttTest" />
-      <item itemvalue="Google Test.MqttTest.mqtt_client_can_subscribe_and_publish_after_ioc_run" />
-      <item itemvalue="Google Test.MqttTest.mqtt_client_receives_persistent_messages_after_subscribe" />
       <item itemvalue="Google Test.MqttTest.mqtt_client_can_subscribe_and_publish" />
+      <item itemvalue="Google Test.MqttTest.mqtt_client_can_subscribe_and_publish_after_ioc_run" />
+      <item itemvalue="Google Test.MqttTest.mqtt_client_received_persistent_messages_after_subscribe" />
+      <item itemvalue="Google Test.MqttTest.mqtt_client_receives_persistent_messages_after_subscribe" />
     </list>
     <recent_temporary>
       <list>
@@ -185,7 +160,10 @@
       <workItem from="1587818808646" duration="5852000" />
       <workItem from="1587937231889" duration="26279000" />
       <workItem from="1588070332875" duration="24341000" />
-      <workItem from="1588144300186" duration="15208000" />
+      <workItem from="1588144300186" duration="20050000" />
+      <workItem from="1588322207978" duration="2467000" />
+      <workItem from="1588339335824" duration="1928000" />
+      <workItem from="1588597528535" duration="3796000" />
     </task>
     <servers />
   </component>
@@ -202,62 +180,83 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="537" y="222" key="#MqttTest.mqtt_client_can_subscribe_and_publish" timestamp="1588600361380">
+      <screen x="0" y="23" width="1680" height="979" />
+    </state>
+    <state x="537" y="222" key="#MqttTest.mqtt_client_can_subscribe_and_publish/0.23.1680.979@0.23.1680.979" timestamp="1588600361380" />
     <state x="446" y="222" key="#MqttTest.mqtt_client_received_persistent_messages_after_subscribe" timestamp="1588157914330">
       <screen x="0" y="23" width="1680" height="972" />
     </state>
     <state x="446" y="222" key="#MqttTest.mqtt_client_received_persistent_messages_after_subscribe/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588157914329" />
-    <state width="1638" height="454" key="GridCell.Tab.0.bottom" timestamp="1588198406243">
-      <screen x="0" y="23" width="1680" height="972" />
+    <state width="1638" height="454" key="GridCell.Tab.0.bottom" timestamp="1588319213592">
+      <screen x="0" y="23" width="1680" height="979" />
     </state>
     <state width="1878" height="227" key="GridCell.Tab.0.bottom/0.23.1680.972/-125.-1080.1920.1080@-125.-1080.1920.1080" timestamp="1588168025371" />
     <state width="1638" height="266" key="GridCell.Tab.0.bottom/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588157963374" />
     <state width="1638" height="454" key="GridCell.Tab.0.bottom/0.23.1680.972@0.23.1680.972" timestamp="1588198406243" />
-    <state width="1638" height="454" key="GridCell.Tab.0.center" timestamp="1588198406242">
-      <screen x="0" y="23" width="1680" height="972" />
+    <state width="1638" height="454" key="GridCell.Tab.0.bottom/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213592" />
+    <state width="1638" height="454" key="GridCell.Tab.0.center" timestamp="1588319213590">
+      <screen x="0" y="23" width="1680" height="979" />
     </state>
     <state width="1878" height="227" key="GridCell.Tab.0.center/0.23.1680.972/-125.-1080.1920.1080@-125.-1080.1920.1080" timestamp="1588168025370" />
     <state width="1638" height="266" key="GridCell.Tab.0.center/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588157963373" />
     <state width="1638" height="454" key="GridCell.Tab.0.center/0.23.1680.972@0.23.1680.972" timestamp="1588198406242" />
-    <state width="1638" height="454" key="GridCell.Tab.0.left" timestamp="1588198406241">
-      <screen x="0" y="23" width="1680" height="972" />
+    <state width="1638" height="454" key="GridCell.Tab.0.center/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213590" />
+    <state width="1638" height="454" key="GridCell.Tab.0.left" timestamp="1588319213590">
+      <screen x="0" y="23" width="1680" height="979" />
     </state>
     <state width="1878" height="227" key="GridCell.Tab.0.left/0.23.1680.972/-125.-1080.1920.1080@-125.-1080.1920.1080" timestamp="1588168025369" />
     <state width="1638" height="266" key="GridCell.Tab.0.left/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588157963372" />
     <state width="1638" height="454" key="GridCell.Tab.0.left/0.23.1680.972@0.23.1680.972" timestamp="1588198406241" />
-    <state width="1638" height="454" key="GridCell.Tab.0.right" timestamp="1588198406243">
-      <screen x="0" y="23" width="1680" height="972" />
+    <state width="1638" height="454" key="GridCell.Tab.0.left/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213590" />
+    <state width="1638" height="454" key="GridCell.Tab.0.right" timestamp="1588319213591">
+      <screen x="0" y="23" width="1680" height="979" />
     </state>
     <state width="1878" height="227" key="GridCell.Tab.0.right/0.23.1680.972/-125.-1080.1920.1080@-125.-1080.1920.1080" timestamp="1588168025371" />
     <state width="1638" height="266" key="GridCell.Tab.0.right/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588157963373" />
     <state width="1638" height="454" key="GridCell.Tab.0.right/0.23.1680.972@0.23.1680.972" timestamp="1588198406243" />
-    <state width="1638" height="454" key="GridCell.Tab.1.bottom" timestamp="1588198406244">
-      <screen x="0" y="23" width="1680" height="972" />
+    <state width="1638" height="454" key="GridCell.Tab.0.right/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213591" />
+    <state width="1638" height="454" key="GridCell.Tab.1.bottom" timestamp="1588319213593">
+      <screen x="0" y="23" width="1680" height="979" />
     </state>
     <state width="1878" height="227" key="GridCell.Tab.1.bottom/0.23.1680.972/-125.-1080.1920.1080@-125.-1080.1920.1080" timestamp="1588168026450" />
     <state width="1638" height="200" key="GridCell.Tab.1.bottom/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588151763917" />
     <state width="1638" height="454" key="GridCell.Tab.1.bottom/0.23.1680.972@0.23.1680.972" timestamp="1588198406244" />
-    <state width="1638" height="454" key="GridCell.Tab.1.center" timestamp="1588198406244">
-      <screen x="0" y="23" width="1680" height="972" />
+    <state width="1638" height="454" key="GridCell.Tab.1.bottom/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213593" />
+    <state width="1638" height="454" key="GridCell.Tab.1.center" timestamp="1588319213592">
+      <screen x="0" y="23" width="1680" height="979" />
     </state>
     <state width="1878" height="227" key="GridCell.Tab.1.center/0.23.1680.972/-125.-1080.1920.1080@-125.-1080.1920.1080" timestamp="1588168026448" />
     <state width="1638" height="200" key="GridCell.Tab.1.center/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588151763916" />
     <state width="1638" height="454" key="GridCell.Tab.1.center/0.23.1680.972@0.23.1680.972" timestamp="1588198406244" />
-    <state width="1638" height="454" key="GridCell.Tab.1.left" timestamp="1588198406243">
-      <screen x="0" y="23" width="1680" height="972" />
+    <state width="1638" height="454" key="GridCell.Tab.1.center/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213592" />
+    <state width="1638" height="454" key="GridCell.Tab.1.left" timestamp="1588319213592">
+      <screen x="0" y="23" width="1680" height="979" />
     </state>
     <state width="1878" height="227" key="GridCell.Tab.1.left/0.23.1680.972/-125.-1080.1920.1080@-125.-1080.1920.1080" timestamp="1588168026448" />
     <state width="1638" height="200" key="GridCell.Tab.1.left/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588151763916" />
     <state width="1638" height="454" key="GridCell.Tab.1.left/0.23.1680.972@0.23.1680.972" timestamp="1588198406243" />
-    <state width="1638" height="454" key="GridCell.Tab.1.right" timestamp="1588198406244">
-      <screen x="0" y="23" width="1680" height="972" />
+    <state width="1638" height="454" key="GridCell.Tab.1.left/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213592" />
+    <state width="1638" height="454" key="GridCell.Tab.1.right" timestamp="1588319213593">
+      <screen x="0" y="23" width="1680" height="979" />
     </state>
     <state width="1878" height="227" key="GridCell.Tab.1.right/0.23.1680.972/-125.-1080.1920.1080@-125.-1080.1920.1080" timestamp="1588168026449" />
     <state width="1638" height="200" key="GridCell.Tab.1.right/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588151763917" />
     <state width="1638" height="454" key="GridCell.Tab.1.right/0.23.1680.972@0.23.1680.972" timestamp="1588198406244" />
+    <state width="1638" height="454" key="GridCell.Tab.1.right/0.23.1680.979/-125.-1080.1920.1080@0.23.1680.979" timestamp="1588319213593" />
+    <state x="349" y="148" key="SettingsEditor" timestamp="1588597782518">
+      <screen x="0" y="23" width="1680" height="980" />
+    </state>
+    <state x="349" y="148" key="SettingsEditor/0.23.1680.980@0.23.1680.980" timestamp="1588597782518" />
     <state x="208" y="-992" width="1288" height="772" key="dock-window-1" timestamp="1588144640243">
       <screen x="-125" y="-1080" width="1920" height="1080" />
     </state>
     <state x="208" y="-992" width="1288" height="772" key="dock-window-1/0.23.1680.972/-125.-1080.1920.1080@0.23.1680.972" timestamp="1588144640243" />
+    <state x="541" y="266" width="598" height="487" key="find.popup" timestamp="1588611753450">
+      <screen x="0" y="23" width="1680" height="979" />
+    </state>
+    <state x="541" y="266" width="598" height="486" key="find.popup/0.23.1680.977/-125.-1080.1920.1080@0.23.1680.977" timestamp="1588237266557" />
+    <state x="541" y="266" width="598" height="487" key="find.popup/0.23.1680.979@0.23.1680.979" timestamp="1588611753450" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

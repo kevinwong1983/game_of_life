@@ -2,7 +2,7 @@
 
 #include <boost/asio.hpp>
 #include "publishable_with_context.h"
-#include "mqtt_client.h"
+#include "mosquitto_mqtt_client.h"
 
 class StateDispatcher : public PublishableWithContext {
 public:
