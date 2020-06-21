@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.12.3)
+
+# projects
+project(core C CXX)
+
+set(CMAKE_CXX_STANDARD 14)
+
+# prepare build environment
+file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h")
+
+add_library(${PROJECT_NAME} ${SOURCES})
+
+target_link_libraries(${PROJECT_NAME} PUBLIC
+        -pthread
+        boost_system
+        boost_date_time
+        mqtt_lib
+        mosquitto
+        taocpp::json)
+
+target_include_directories(${PROJECT_NAME}
+        PUBLIC
+        include/core
+        test/mock)
+
+add_subdirectory(test)
