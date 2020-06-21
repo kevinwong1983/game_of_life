@@ -28,6 +28,7 @@ target_link_libraries(${PROJECT_NAME}
         core
         boost_system
         boost_date_time
+        boost_program_options
         mqtt_lib
         mosquitto)
 

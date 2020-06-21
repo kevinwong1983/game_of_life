@@ -20,20 +20,6 @@ GameView::~GameView() {
 }
 
 void GameView::DrawGameWorld(int rows, int columns) {
-
-//    std::vector<std::vector<std::unique_ptr<Cell>>> Matrix;
-//    std::generate_n(std::back_inserter(Matrix), columns, [&cell_type, state_dispatch, y = 0, &rows]()mutable {
-//        std::vector<std::unique_ptr<Cell>> inner;
-//        std::generate_n(std::back_inserter(inner), rows, [&cell_type, state_dispatch, x = 0, &y]()mutable {
-//            auto c = CellFactory::make(cell_type, x, y, state_dispatch);
-//            x++;
-//            return c;
-//        });
-//        y++;
-//        return inner;
-//    });
-
-
     std::vector<std::vector<std::shared_ptr<CellView>>> cell_matrix_view;
     std::generate_n(std::back_inserter(cell_matrix_view), columns, [this, x = 0, &rows]()mutable {
         std::vector<std::shared_ptr<CellView>> inner;
