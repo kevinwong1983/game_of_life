@@ -10,6 +10,8 @@ public:
 
     StateDispatcherCell(std::shared_ptr<MqttClient> mqtt_client);
 
+    ~StateDispatcherCell() = default;
+
     void publishConfig(std::shared_ptr<Configuration> config) override;
 
     void subscribeConfig(std::function<void(std::shared_ptr<Configuration>)> callback) override;

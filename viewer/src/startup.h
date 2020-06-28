@@ -1,9 +1,10 @@
 #pragma once
 
 #include <QObject>
-#include "view/mainwindow.h"
+
 #include "configuration.h"
 #include "matrix.h"
+#include "view/mainwindow.h"
 #include "model/game.h"
 
 class Startup : public QObject {

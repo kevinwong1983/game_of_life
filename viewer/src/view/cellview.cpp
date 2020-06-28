@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "cellview.h"
 #include "ui_cellview.h"
 
@@ -16,6 +17,7 @@ CellView::~CellView() {
 }
 
 void CellView::mouseReleaseEvent(QMouseEvent *event) {
+    (void) event;
     std::cout << __func__ << " r: " << r_ << " c:" << c_ << std::endl;
 }
 
@@ -35,5 +37,7 @@ void CellView::UpdateBackground(bool state) {
 }
 
 void CellView::on_publish(int x, int y, bool s) {
+    (void) x;
+    (void) y;
     OnStateChange(s);
 }

@@ -16,7 +16,8 @@ void StateDispatcherCell::publishConfig(std::shared_ptr<Configuration> config) {
 
 void StateDispatcherCell::subscribeConfig(std::function<void(std::shared_ptr<Configuration>)> callback) {
     std::cout << __func__ << " 1" << std::endl;
-    mqtt_client_->Subscribe("game_of_life/config", [this, &callback](const Topic &t, const Message &m) {
+    mqtt_client_->Subscribe("game_of_life/config", [&callback](const Topic &t, const Message &m) {
+        (void) t;
         std::cout << __func__ << " 2" << std::endl;
         auto c = std::make_shared<Configuration>();
         c->from_json(m);

@@ -43,6 +43,7 @@ MosquittoMqttClient::~MosquittoMqttClient() {
 }
 
 void MosquittoMqttClient::OnPublish(struct mosquitto* mosq, void* obj, const mosquitto_message* msg) {
+    (void) mosq;
     auto self = static_cast<MosquittoMqttClient*>(obj);
 
     for (const auto& subscription : self->subscriptions_) {
@@ -63,18 +64,19 @@ void MosquittoMqttClient::OnPublish(struct mosquitto* mosq, void* obj, const mos
 
 std::string MosquittoMqttClient::payload_to_string(void* message, int length){
     char* a = static_cast<char*>(message);
-    char b[length + 1];
-    b[length] = '\0';
+    std::vector<char> b(length, '\0');
     int i = 0;
     while (i < length) {
         b[i] = a[i];
         i++;
     }
-    return std::string(b);
+    return std::string(b.begin(), b.end());
 }
 
 void MosquittoMqttClient::OnConnect(mosquitto* mosq, void* obj, int rc){
-    auto self = static_cast<MosquittoMqttClient*>(obj);
+    (void) mosq;
+    (void) obj;
+    (void) rc;
     std::cout << __func__ << std::endl;
 }
 

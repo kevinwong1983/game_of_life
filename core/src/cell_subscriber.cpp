@@ -4,8 +4,9 @@
 
 CellSubscriber::CellSubscriber(bool state, int x, int y, std::shared_ptr<StatePublisher> on_state_set) :
         x_(x), y_(y),
+        marked_(false),
         state_(state),
-        marked_(false), sc_(on_state_set->subscribe(x_, y_, std::bind(
+        sc_(on_state_set->subscribe(x_, y_, std::bind(
         &CellSubscriber::subscribeHandler, this,
         std::placeholders::_1,
         std::placeholders::_2))) {

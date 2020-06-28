@@ -8,8 +8,8 @@
 
 static std::map<std::string, std::unique_ptr<CellItemFactory>> init() {
     std::map<std::string, std::unique_ptr<CellItemFactory>> map;
-    map[CellFactory::kPublisher] = std::move(std::make_unique<CellPublisherFactory>());
-    map[CellFactory::kSubscriber] = std::move(std::make_unique<CellSubscriberFactory>());
+    map[CellFactory::kPublisher] = std::make_unique<CellPublisherFactory>();
+    map[CellFactory::kSubscriber] = std::make_unique<CellSubscriberFactory>();
     return map;
 }
 

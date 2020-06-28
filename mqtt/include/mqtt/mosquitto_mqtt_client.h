@@ -19,7 +19,7 @@ class MqttError {
 public:
     MqttError(int code);
     int code();
-    const char* toString();
+    const char* toString() const;
 
 private:
     int code_;
@@ -28,12 +28,11 @@ private:
 class MqttException : public std::exception {
 public:
     MqttException(MqttError code) : code_(code){};
-    const char* what() { return code_.toString(); }
-
+    const char* what() const noexcept { return code_.toString(); }
     MqttError code() { return code_; }
 
 private:
-    MqttError code_;
+    const MqttError code_;
 };
 // <- move them in separate header files
 

@@ -11,7 +11,7 @@ Game::Game(std::shared_ptr<StatePublisher> dispatcher) :
     // todo: question - within a class binding to member function in constructor, that is not static
 }
 
-void Game::CreateGameWorld(std::shared_ptr<Configuration> configuration) {
+void Game::CreateGame(std::shared_ptr<Configuration> configuration) {
     if (configuration->rows_ && configuration->columns_) {
         matrix_ = std::make_unique<Matrix>(configuration->rows_.get(), configuration->columns_.get(), dispatcher_,
                                            kCellType_); // todo: Matrix factory
@@ -22,6 +22,6 @@ void Game::WireGamePixel(int x, int y, std::shared_ptr<CellView> cell) {
     matrix_->subscribeToCell(x, y, cell);
 }
 
-bool Game::GetPixel(int x, int y) const {
+bool Game::GetPixelState(int x, int y) const {
     return matrix_->get(x, y);
 }

@@ -1,5 +1,4 @@
-#ifndef CELLVIEW_H
-#define CELLVIEW_H
+#pragma once
 
 #include <QFrame>
 #include "state_publisher_abstract.h"
@@ -31,5 +30,3 @@ private:
     int r_;
     int c_;
 };
-
-#endif // CELLVIEW_H

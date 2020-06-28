@@ -1,9 +1,10 @@
 #include <iostream>
 #include "cell_publisher.h"
 
-CellPublisher::CellPublisher(bool state, int x, int y, std::shared_ptr<StatePublisher> on_state_set) : state_(state),
+CellPublisher::CellPublisher(bool state, int x, int y, std::shared_ptr<StatePublisher> on_state_set) : x_(x), y_(y),
                                                                                                        marked_(false),
-                                                                                                       x_(x), y_(y) {
+                                                                                                       state_(state)
+                                                                                                       {
     subscribeToStateSet(on_state_set);
 }
 
@@ -60,5 +61,6 @@ void CellPublisher::subscribeToStateSet(std::shared_ptr<StatePublisher> on_state
 }
 
 void CellPublisher::subscribe(std::shared_ptr<StatePublisherAbstract> on_state_set) {
+    (void) on_state_set;
     std::cout << "not implemented" << std::endl;
 }

@@ -81,18 +81,22 @@ bool Matrix::isBottomRight(int x, int y) const {
 }
 
 bool Matrix::isUpper(int x, int y) const {
+    (void) x;
     return (y == 0);
 }
 
 bool Matrix::isBottom(int x, int y) const {
+    (void) x;
     return (y == rows_ - 1);
 }
 
 bool Matrix::isLeft(int x, int y) const {
+    (void) y;
     return (x == 0);
 }
 
 bool Matrix::isRight(int x, int y) const {
+    (void) y;
     return (x == columns_ - 1);
 }
 

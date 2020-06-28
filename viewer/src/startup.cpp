@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include <QEventLoop>
+
 #include "startup.h"
 
 Startup::Startup(Game &game) : game_(game), game_view_(*new GameView(nullptr, game)),
@@ -23,7 +24,7 @@ void Startup::SetConfig(std::shared_ptr<Configuration> configuration) {
 void Startup::OnStartup(std::shared_ptr<Configuration> config) {
     if (config->rows_ && config->columns_) {
         std::cout << __func__ << " r:" << config->rows_.get() << " c:" << config->columns_.get() << std::endl;
-        game_.CreateGameWorld(config);
+        game_.CreateGame(config);
         game_view_.DrawGameWorld(config->rows_.get(), config->columns_.get());
         SetWindowSize(config->rows_.get(), config->columns_.get());
     }

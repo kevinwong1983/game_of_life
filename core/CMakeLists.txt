@@ -10,6 +10,8 @@ file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h")
 
 add_library(${PROJECT_NAME} ${SOURCES})
 
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
+
 target_link_libraries(${PROJECT_NAME} PUBLIC
         -pthread
         boost_system

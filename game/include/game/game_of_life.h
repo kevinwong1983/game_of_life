@@ -10,6 +10,7 @@
 class GameOfLife : public Publishable {
 public:
     GameOfLife(int rows, int columns, std::shared_ptr<StatePublisher> state_dispatch);
+    ~GameOfLife() = default;
     void on_publish() override;
 private:
     std::shared_ptr<Matrix> matrix_;

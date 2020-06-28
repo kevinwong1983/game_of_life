@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <QObject>
+
 #include "state_publisher_cell.h"
 #include "configuration.h"
 #include "matrix.h"
@@ -13,11 +14,11 @@ Q_OBJECT
 public:
     Game(std::shared_ptr<StatePublisher> dispatcher);
 
-    void CreateGameWorld(std::shared_ptr<Configuration> configuration); // todo: why use a shared pointer???
+    void CreateGame(std::shared_ptr<Configuration> configuration); // todo: Question - why use a shared pointer???
 
     void WireGamePixel(int x, int y, std::shared_ptr<CellView> cell);
 
-    bool GetPixel(int x, int y) const;
+    bool GetPixelState(int x, int y) const;
 
 signals:
 

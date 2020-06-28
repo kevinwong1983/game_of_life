@@ -1,11 +1,12 @@
 #include <iostream>
 #include <boost/asio.hpp>
+#include <boost/program_options.hpp>
 #include <QApplication>
 #include <QPushButton>
+
 #include "state_publisher_cell.h"
 #include "game.h"
 #include "startup.h"
-#include "boost/program_options.hpp"
 
 void wait(boost::asio::io_context &ioc) {   // todo: probably there is a better way?
     ioc.post([&ioc]() {
@@ -13,16 +14,17 @@ void wait(boost::asio::io_context &ioc) {   // todo: probably there is a better 
     });
 }
 
-struct ProgramOptions{
+struct ProgramOptions {
     std::string ip;
     int port;
 };
 
-void SetProgramOptions(int argc, char *argv[], ProgramOptions& po) {
+void SetProgramOptions(int argc, char *argv[], ProgramOptions &po) {
     boost::program_options::options_description desc("program options");
     desc.add_options()
             ("help,h", "print info")
-            ("mqtt.ip,i", boost::program_options::value<std::string>(&po.ip)->default_value("127.0.0.1"), "mqtt ip-adress.")
+            ("mqtt.ip,i", boost::program_options::value<std::string>(&po.ip)->default_value("127.0.0.1"),
+             "mqtt ip-adress.")
             ("mqtt.port,p", boost::program_options::value<int>(&po.port)->default_value(1883), "mqtt port number.");
 
     boost::program_options::variables_map vm;

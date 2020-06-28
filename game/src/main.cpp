@@ -38,7 +38,6 @@ int main(int argc, char *argv[]) {
     boost::asio::io_context ioc;
     const std::string id = "game_of_life_" + std::to_string(getppid());
     SetProgramOptions(argc, argv, po);
-
     auto state_dispatch = std::make_shared<StateDispatcherCell>(ioc, id, po.ip, po.port);
     auto gol = std::make_shared<GameOfLife>(po.row, po.column, state_dispatch);
     Engine engine(ioc, boost::asio::chrono::seconds(po.refresh_time));

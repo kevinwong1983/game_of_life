@@ -4,11 +4,15 @@ cmake_minimum_required(VERSION 3.12.3)
 project(game C CXX)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CXX_STANDARD_REQUIRED ON)
+set(COMPILE_FLAGS "${WARNING_FLAGS}")
 
 # prepare build environment
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
         -pthread
