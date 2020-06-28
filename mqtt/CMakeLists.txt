@@ -15,11 +15,13 @@ target_link_libraries(${PROJECT_NAME}
         boost_system
         boost_date_time
         core
+        utils
         mosquitto)
 
 target_include_directories(${PROJECT_NAME}
         PRIVATE
-        include core
+        include/utils
+        include/core
         PUBLIC
         include/mqtt)
 

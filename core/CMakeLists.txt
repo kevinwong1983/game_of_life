@@ -18,9 +18,12 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
         boost_date_time
         mqtt_lib
         mosquitto
+        utils
         taocpp::json)
 
 target_include_directories(${PROJECT_NAME}
+        PRIVATE
+        include/utils
         PUBLIC
         include/core
         test/mock)
