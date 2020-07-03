@@ -8,18 +8,24 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
-      using: 'docker'
-      image: '/tools/Dockerfile'
+    runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v2
-      - name: build game of life
-        run: |
-          mkdir build
-          cd build
-          cmake ..
-          make -j8
+      
+      - name: Build and tag image
+        run: docker build -t "docker:latest" -f tools/Dockerfile
+      
+      - name: Run image
+        run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker:latest
+      
+      - name: make
+        run: docker exec builder bash -c 'cd && game_of_life && mkdir build && cd build && cmake .. && make -j8'
+      
+      - name: save artifact
+        run: docker exec builder bash -c 'cp game_of_life/build output/'
+
       - uses: actions/upload-artifact@master
         with:
-          name: webpack artifact
-          path: public/
+          name: firmware-${{ env.FIRMWARE_VERSION }}
+          path: output/
