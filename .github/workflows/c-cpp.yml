@@ -20,10 +20,10 @@ jobs:
         run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker:latest
       
       - name: make
-        run: docker exec builder bash -c 'pwd && ls -l && cd game_of_life && mkdir build && cd build && cmake .. && make -j8'
+        run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
       
       - name: save artifact
-        run: docker exec builder bash -c 'cp game_of_life/build output/'
+        run: docker exec builder bash -c 'cp build output/'
 
       - uses: actions/upload-artifact@master
         with:
