@@ -9,7 +9,6 @@ Configuration::Configuration() : rows_(boost::none), columns_(boost::none) {
 }
 
 void Configuration::from_json(std::string json_string) {
-    std::cout << __func__ << json_string << std::endl;
     auto json = tao::json::from_string(json_string);
 
     if (json["rows"].is_unsigned()) {

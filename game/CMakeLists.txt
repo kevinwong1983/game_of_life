@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12.3)
+cmake_minimum_required(VERSION 3.10.2)
 
 # projects
 project(game C CXX)
@@ -11,6 +11,8 @@ set(COMPILE_FLAGS "${WARNING_FLAGS}")
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
 
 #set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
 

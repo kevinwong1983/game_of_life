@@ -12,7 +12,7 @@ Q_OBJECT
 public:
     explicit Startup(Game &game);
 
-    ~Startup();
+    ~Startup() = default;
 
     void show() const;
 
@@ -35,4 +35,7 @@ private:
     GameView &game_view_;
     Stats &stats_;
     std::unique_ptr<MainWindow> main_window_;
+    const int k_cell_pixel_size_ = 20;
+    const int k_padding_row_spacing_ = 100;
+    const int k_padding_column_spacing_ = 50;
 };

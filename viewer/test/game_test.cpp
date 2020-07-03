@@ -23,7 +23,7 @@ public:
 
     std::unique_ptr<Matrix> GetMatrix() {
         return std::move(matrix_);
-    };
+    }
 };
 
 TEST(Game, CreateGameWorld__ValidConfiguration__PixelSetToFalse) {
@@ -36,15 +36,19 @@ TEST(Game, CreateGameWorld__ValidConfiguration__PixelSetToFalse) {
         auto mock = std::make_unique<CellMock>();
 //        EXPECT_CALL(*mock, subscribe(testing::_)).Times(1);
         EXPECT_CALL(*mock, get_state()).WillRepeatedly(testing::Return(false));
-        return std::move(mock);
+        return mock;
     });
     EXPECT_CALL(*cell_mock_factory, make(testing::_, testing::_, testing::_, testing::_))
             .Times(rows * columns)
             .WillRepeatedly(testing::Invoke(
-                     [&mocks](bool a, int b, int c, std::__1::shared_ptr<StatePublisher> d) {
+                     [&mocks](bool a, int b, int c, std::shared_ptr<StatePublisher> d) {
+                         (void) a;
+                         (void) b;
+                         (void) c;
+                         (void) d;
                         auto m = std::move(mocks.back());
                         mocks.pop_back();
-                        return std::move(m);
+                        return m;
                     }));
     auto type = CellFactory::kSubscriber;
     CellFactory::registers(type, std::move(cell_mock_factory));

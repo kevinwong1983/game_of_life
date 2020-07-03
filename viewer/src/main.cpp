@@ -15,17 +15,19 @@ void wait(boost::asio::io_context &ioc) {   // todo: probably there is a better 
 }
 
 struct ProgramOptions {
-    std::string ip;
-    int port;
+    std::string ip = "";
+    int port = 0;
 };
 
-void SetProgramOptions(int argc, char *argv[], ProgramOptions &po) {
+void SetProgramOptions(int argc, char *argv[], ProgramOptions &po) { // NOLINT: keep argument list same as main
     boost::program_options::options_description desc("program options");
+    const int k_default_mqtt_port = 1883;
     desc.add_options()
             ("help,h", "print info")
             ("mqtt.ip,i", boost::program_options::value<std::string>(&po.ip)->default_value("127.0.0.1"),
              "mqtt ip-adress.")
-            ("mqtt.port,p", boost::program_options::value<int>(&po.port)->default_value(1883), "mqtt port number.");
+            ("mqtt.port,p", boost::program_options::value<int>(&po.port)->default_value(k_default_mqtt_port),
+             "mqtt port number.");
 
     boost::program_options::variables_map vm;
     auto parsed = boost::program_options::parse_command_line(argc, argv, desc);
@@ -43,21 +45,26 @@ int main(int argc, char **argv) {
     const std::string id = "viewer_" + std::to_string(getppid());
     SetProgramOptions(argc, argv, po);
 
-    auto state_dispatch = std::make_shared<StateDispatcherCell>(ioc, id, po.ip, po.port);
-
-    QApplication app(argc, argv);
-    Game game(state_dispatch);
-    Startup startup(game);
-    state_dispatch->subscribeConfig(std::bind(&Startup::SetConfig,
-                                              &startup,
-                                              std::placeholders::_1));
-    auto t = std::thread([&ioc]() {
-        wait(ioc);
-        ioc.run();
-    });
-    startup.show();
-    auto rv = app.exec();
-    t.join();
+    int rv = 0;
+    try {
+        auto state_dispatch = std::make_shared<StateDispatcherCell>(ioc, id, po.ip, po.port);
+        QApplication app(argc, argv);
+        Game game(state_dispatch);
+        Startup startup(game);
+        state_dispatch->subscribeConfig(std::bind(&Startup::SetConfig,
+                                                  &startup,
+                                                  std::placeholders::_1));
+        auto t = std::thread([&ioc]() {
+            wait(ioc);
+            ioc.run();
+        });
+        startup.show();
+        rv = app.exec();
+        t.join();
+    }
+    catch(std::exception& e) {
+        std::cout << "exception occurred in vieuwer: " << e.what() << std::endl;
+    }
 
     return rv;
 }

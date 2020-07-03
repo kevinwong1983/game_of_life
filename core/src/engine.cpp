@@ -16,7 +16,12 @@ Engine::Engine(boost::asio::io_context &ioc, boost::asio::chrono::seconds second
 }
 
 Engine::~Engine() {
-    subscribers_.disconnect_all_slots();
+    try {
+        subscribers_.disconnect_all_slots();
+    }
+    catch(std::exception& e) {
+        std::cout << "not able to disconnect subscriber slots with error code:" << e.what() << std::endl;
+    }
 }
 
 void Engine::timer_handler(boost::system::error_code e) {

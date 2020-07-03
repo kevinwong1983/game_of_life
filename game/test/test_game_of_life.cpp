@@ -1,8 +1,6 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <boost/asio.hpp>
-#include <boost/bind.hpp>
-#include <boost/signals2.hpp>
 #include <vector>
 #include "game_of_life.h"
 #include "mock_state_dispatcher.h"
@@ -19,7 +17,6 @@ TEST(game_of_life, construct) {
     boost::asio::io_context ioc;
     std::string id = "id";
     std::string ip = "123";
-    int port = 123;
 
     auto mock = std::make_shared<StateDispatcherMock>();
     auto gol = GameOfLife(row, column, mock);

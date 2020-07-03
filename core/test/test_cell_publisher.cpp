@@ -53,13 +53,21 @@ int global_cell_count = 0;
 
 class CellSubscriber : public StatePublisher {
     void on_publish(int x, int y, bool s) override {
+        (void) y;
         std::cout << "context x:" << std::to_string(x) << " y:" << std::to_string(x) << " s:" << std::to_string(s)
                   << std::endl;
         global_cell_count++;
     }
-    void publishConfig(std::shared_ptr<Configuration> config) override {};
-    void subscribeConfig(std::function<void(std::shared_ptr<Configuration>)> callback) override {};
+    void publishConfig(std::shared_ptr<Configuration> config) override {
+        (void) config;
+    };
+    void subscribeConfig(std::function<void(std::shared_ptr<Configuration>)> callback) override {
+        (void) callback;
+    };
     boost::signals2::connection subscribe(int x, int y, std::function<void(const Topic &t, const Message &m)> callback) override {
+        (void) x;
+        (void) y;
+        (void) callback;
         return boost::signals2::connection();
     };
 };

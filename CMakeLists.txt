@@ -1,5 +1,5 @@
 project("game of life")
-cmake_minimum_required(VERSION 3.12.3)
+cmake_minimum_required(VERSION 3.10.2)
 
 include(cmake/utilities.cmake)
 include(cmake/FindMosquitto.cmake)
@@ -16,6 +16,9 @@ find_package(Boost REQUIRED)
 find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 find_mosquitto()
+
+# creates a make test target
+enable_testing()
 
 if (MSVC)
     # warning level 4 and all warnings as errors

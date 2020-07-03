@@ -5,7 +5,7 @@
 #include "matrix.h"
 
 Game::Game(std::shared_ptr<StatePublisher> dispatcher) :
-        dispatcher_(dispatcher), row_(0),
+        dispatcher_(std::move(dispatcher)), row_(0),
         column_(0), matrix_(std::make_unique<Matrix>(row_, column_, dispatcher_,
                                                      kCellType_)) {
     // todo: question - within a class binding to member function in constructor, that is not static

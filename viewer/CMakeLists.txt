@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12.3)
+cmake_minimum_required(VERSION 3.10.2)
 
 # projects
 project(viewer C CXX)
@@ -16,8 +16,10 @@ find_package(Qt5 COMPONENTS Network REQUIRED)
 
 # prepare build environment
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h" "src/*/*.cpp" "src/*/*.h"  "src/*/*.ui")
-message(STATUS SOURCES ${SOURCES})
+
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
 
 target_link_libraries(${PROJECT_NAME}
         PRIVATE

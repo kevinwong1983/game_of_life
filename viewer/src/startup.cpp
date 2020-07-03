@@ -12,9 +12,6 @@ Startup::Startup(Game &game) : game_(game), game_view_(*new GameView(nullptr, ga
     WireStartupConnections();
 }
 
-Startup::~Startup() {
-}
-
 void Startup::SetConfig(std::shared_ptr<Configuration> configuration) {
     if (configuration->rows_ && configuration->columns_) {
         emit NotifyStartup(configuration); // use emit to decouple the ioc and qt_exec threads
@@ -35,10 +32,10 @@ void Startup::show() const {
 }
 
 void Startup::SetWindowSize(int rows, int columns) {
-    main_window_->setMaximumSize(columns * 20 + columns + 50,
-                                 rows * 20 + rows + 100);
-    main_window_->setMinimumSize(columns * 20 + columns + 50,
-                                 rows * 20 + rows + 100);
+    main_window_->setMaximumSize(columns * k_cell_pixel_size_ + columns + k_padding_column_spacing_,
+                                 rows * k_cell_pixel_size_ + rows + k_padding_row_spacing_);
+    main_window_->setMinimumSize(columns * k_cell_pixel_size_ + columns + k_padding_column_spacing_,
+                                 rows * k_cell_pixel_size_ + rows + k_padding_row_spacing_);
 }
 
 void Startup::WireStartupConnections() {

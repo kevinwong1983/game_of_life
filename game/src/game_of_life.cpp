@@ -15,7 +15,7 @@ GameOfLife::GameOfLife(int rows, int columns, std::shared_ptr<StatePublisher> st
     matrix_ = std::make_shared<Matrix>(rows, columns, state_dispatch, cell_type); // todo: Matrix factory
     Rules::populate(matrix_);
     matrix_->print();
-};
+}
 
 void GameOfLife::on_publish() {
     Rules::apply(matrix_);

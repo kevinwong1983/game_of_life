@@ -10,19 +10,19 @@ void Rules::apply(std::shared_ptr<Matrix> m) {
         for (auto y = 0; y < row; y++) {
             auto neighbours = m->getNeighbours(x, y);
             auto alive = m->get(x, y);
-            //    Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-            if (alive && (neighbours < 2)) {
+            // Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+            if (alive && (neighbours < 2)) {    // NOLINT: suppress "bugprone-branch-clone" for understandablity
                 m->mark(x, y, false);
             }
-                //    Any live cell with two or three live neighbours lives on to the next generation.
-            else if (alive && ((neighbours == 2) || (neighbours == 3))) {
+            // Any live cell with two or three live neighbours lives on to the next generation.
+            else if (alive && ((neighbours == 2) || (neighbours == 3))) {     // NOLINT: suppress "bugprone-branch-clone" for understandablity
                 m->mark(x, y, true);
             }
-                //    Any live cell with more than three live neighbours dies, as if by overpopulation.
+            // Any live cell with more than three live neighbours dies, as if by overpopulation.
             else if (alive && (neighbours > 3)) {
                 m->mark(x, y, false);
             }
-                //    Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+            // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
             else if (!alive && (neighbours == 3)) {
                 m->mark(x, y, true);
             }

@@ -2,14 +2,12 @@
 #include "cell_publisher.h"
 
 CellPublisher::CellPublisher(bool state, int x, int y, std::shared_ptr<StatePublisher> on_state_set) : x_(x), y_(y),
-                                                                                                       marked_(false),
                                                                                                        state_(state)
                                                                                                        {
     subscribeToStateSet(on_state_set);
 }
 
-CellPublisher::~CellPublisher() {
-}
+CellPublisher::~CellPublisher() = default;
 
 CellPublisher::CellPublisher(const CellPublisher &that) : x_(that.x_), y_(that.y_), marked_(that.marked_),
                                                           state_(that.state_) {

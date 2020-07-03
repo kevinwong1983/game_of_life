@@ -248,10 +248,11 @@ TEST_F(TestMqttClient, mqtt_client_can_unsubscribe) {
     auto mqtt_client = std::make_unique<MosquittoMqttClient>("127.0.0.1", 1883, "hello", ioc);
 
     // and mqtt client A subscribed to topic "hello/world".
-    int number_of_messages_received = 0;
     auto connection = mqtt_client->Subscribe("hello/world",
-                                             [&number_of_messages_received, &work](const Topic &t, const Message &m) {
+                                             [](const Topic &t, const Message &m) {
                                                  EXPECT_TRUE(false);
+                                                 (void) m;
+                                                 (void) t;
                                              });
 
     // and mqtt client A unsubscribed from topic "hello/world".
