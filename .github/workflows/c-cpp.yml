@@ -23,7 +23,7 @@ jobs:
         run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
       
       - name: save artifact
-        run: docker exec builder bash -c 'cp build output/'
+        run: docker exec builder bash -c 'cp -r build output/'
 
       - uses: actions/upload-artifact@master
         with:
