@@ -1,0 +1,25 @@
+name: game_of_life CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on:
+      using: 'docker'
+      image: '/tools/Dockerfile'
+    steps:
+      - uses: actions/checkout@v2
+      - name: build game of life
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          make -j8
+      - uses: actions/upload-artifact@master
+        with:
+          name: webpack artifact
+          path: public/
