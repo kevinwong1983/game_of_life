@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v2
         
       - name: docker run  
-        uses: docker.pkg.github.com/kevinwong1983/game_of_life/dockerfile:latest
+        uses: 'docker.pkg.github.com/kevinwong1983/game_of_life/dockerfile:latest'
 #         with:
 #           repo-token: ${{ secrets.GITHUB_TOKEN }}
  
