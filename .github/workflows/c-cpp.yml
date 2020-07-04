@@ -9,24 +9,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: 'tools/Dockerfile'
-      volumes:
-      - /workspace:/github/workspace
+#     container:
+#       image: 'docker://asdfasdf'
+#       volumes:
+#       - /workspace:/github/workspace
     steps:
       - uses: actions/checkout@v2
 
-      - name: Make
-        run: pwd && ls -l && mkdir build && cd build && cmake .. && make -j8
-      
-#       - name: Build and tag image
-#         run: docker build -t "docker:latest" -f tools/Dockerfile .
-      
-#       - name: Run image
-#         run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker:latest
-      
 #       - name: Make
-#         run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
+#         run: pwd && ls -l && mkdir build && cd build && cmake .. && make -j8
+      
+      - name: Build and tag image
+        run: docker build -t "docker:latest" -f tools/Dockerfile .
+      
+      - name: Run image
+        run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker:latest
+      
+      - name: Make
+        run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
       
       - name: Save artifact
         run: docker exec builder bash -c 'cp -r build output'
