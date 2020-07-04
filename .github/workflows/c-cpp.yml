@@ -7,17 +7,17 @@ on:
     branches: [ master ]
 
 jobs:
-#   build_build_push_docker:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Build, Tag, Push Docker
-#         uses: mattdavis0351/actions/docker-gpr@v1
-#         with:
-#           repo-token: ${{ secrets.GITHUB_TOKEN }}
-#           image-name: Dockerfile
-#           dockerfile-location: tools
-#           tag: latest
+  build_build_push_docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build, Tag, Push Docker
+        uses: mattdavis0351/actions/docker-gpr@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          image-name: Dockerfile
+          dockerfile-location: tools
+          tag: latest
   
   build:
     runs-on: ubuntu-latest
@@ -25,14 +25,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         
-      - name: Run docker	    
-        uses: docker.pkg.github.com/kevinwong1983/game_of_life/dockerfile:5e9
+      - name: docker run  
+        uses: docker.pkg.github.com/kevinwong1983/game_of_life/dockerfile:latest
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
  
       - name: Make
         run: pwd && ls -l && mkdir build && cd build && cmake .. && make -j8
-
       
 #       - name: Build and tag image
 #         run: docker build -t "docker:latest" -f tools/Dockerfile .
