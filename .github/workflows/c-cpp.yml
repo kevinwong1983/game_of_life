@@ -7,33 +7,44 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  docker_image:
     runs-on: ubuntu-latest
+    steps:
+      - name: Build, Tag, Push
+        uses: mattdavis0351/actions/docker-gpr@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          image-name: Dockerfile
+          dockerfile-location: tools
+          tag: latest
+  
+#   build:
+#     runs-on: ubuntu-latest
 #     container:
 #       image: 'docker://asdfasdf'
 #       volumes:
 #       - /workspace:/github/workspace
-    steps:
-      - uses: actions/checkout@v2
+#     steps:
+#       - uses: actions/checkout@v2
 
 #       - name: Make
 #         run: pwd && ls -l && mkdir build && cd build && cmake .. && make -j8
       
-      - name: Build and tag image
-        run: docker build -t "docker:latest" -f tools/Dockerfile .
+#       - name: Build and tag image
+#         run: docker build -t "docker:latest" -f tools/Dockerfile .
       
-      - name: Run image
-        run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker:latest
+#       - name: Run image
+#         run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker:latest
       
-      - name: Make
-        run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
+#       - name: Make
+#         run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
       
-      - name: Save artifact
-        run: docker exec builder bash -c 'cp -r build output'
-      - uses: actions/upload-artifact@master
-        with:
-          name: firmware-${{ env.FIRMWARE_VERSION }}
-          path: output
+#       - name: Save artifact
+#         run: docker exec builder bash -c 'cp -r build output'
+#       - uses: actions/upload-artifact@master
+#         with:
+#           name: firmware-${{ env.FIRMWARE_VERSION }}
+#           path: output
   
 #   test:
 #     runs-on: ubuntu-latest
