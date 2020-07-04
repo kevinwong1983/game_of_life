@@ -7,30 +7,32 @@ on:
     branches: [ master ]
 
 jobs:
-  docker_image:
+#   build_build_push_docker:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Build, Tag, Push Docker
+#         uses: mattdavis0351/actions/docker-gpr@v1
+#         with:
+#           repo-token: ${{ secrets.GITHUB_TOKEN }}
+#           image-name: Dockerfile
+#           dockerfile-location: tools
+#           tag: latest
+  
+  build:
     runs-on: ubuntu-latest
+   
     steps:
       - uses: actions/checkout@v2
         
-      - name: Build, Tag, Push
-        uses: mattdavis0351/actions/docker-gpr@v1
+      - name: Run docker	    
+        uses: docker.pkg.github.com/kevinwong1983/game_of_life/dockerfile:5e9
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          image-name: Dockerfile
-          dockerfile-location: tools
-          tag: latest
-  
-#   build:
-#     runs-on: ubuntu-latest
-#     container:
-#       image: 'docker://asdfasdf'
-#       volumes:
-#       - /workspace:/github/workspace
-#     steps:
-#       - uses: actions/checkout@v2
+ 
+      - name: Make
+        run: pwd && ls -l && mkdir build && cd build && cmake .. && make -j8
 
-#       - name: Make
-#         run: pwd && ls -l && mkdir build && cd build && cmake .. && make -j8
       
 #       - name: Build and tag image
 #         run: docker build -t "docker:latest" -f tools/Dockerfile .
@@ -41,12 +43,12 @@ jobs:
 #       - name: Make
 #         run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
       
-#       - name: Save artifact
-#         run: docker exec builder bash -c 'cp -r build output'
-#       - uses: actions/upload-artifact@master
-#         with:
-#           name: firmware-${{ env.FIRMWARE_VERSION }}
-#           path: output
+      - name: Save artifact
+        run: docker exec builder bash -c 'cp -r build output'
+      - uses: actions/upload-artifact@master
+        with:
+          name: firmware-${{ env.FIRMWARE_VERSION }}
+          path: output
   
 #   test:
 #     runs-on: ubuntu-latest
