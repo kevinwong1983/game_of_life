@@ -10,6 +10,8 @@ jobs:
   docker_image:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+        
       - name: Build, Tag, Push
         uses: mattdavis0351/actions/docker-gpr@v1
         with:
