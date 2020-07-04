@@ -21,14 +21,13 @@ jobs:
   
   build:
     runs-on: ubuntu-latest
-   
     steps:
       - uses: actions/checkout@v2
         
       - name: docker run  
         uses: docker.pkg.github.com/kevinwong1983/game_of_life/dockerfile:latest
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           repo-token: ${{ secrets.GITHUB_TOKEN }}
  
       - name: Make
         run: pwd && ls -l && mkdir build && cd build && cmake .. && make -j8
