@@ -24,22 +24,27 @@ jobs:
   build:
     needs: docker_image_build
     runs-on: ubuntu-latest
+    container: 
+      image: docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
     steps:
       - uses: actions/checkout@v2
- 
-      - name: Docker login
-        run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-      - name: Pull image
-        run: docker pull "docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest"
-
-      - name: Run image
-        run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
-
+        
       - name: Make
-        run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
+        run: pwd && ls -l && mkdir build && cd build && cmake .. && make -j8
+      
+#       - name: Docker login
+#         run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
+#         env:
+#           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+#       - name: Pull image
+#         run: docker pull "docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest"
+
+#       - name: Run image
+#         run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
+
+#       - name: Make
+#         run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
       
       - name: Save artifact
         run: docker exec builder bash -c 'cp -r build output'
@@ -57,7 +62,7 @@ jobs:
     - uses: actions/download-artifact@master
       with:
         name: firmware-${{ env.FIRMWARE_VERSION }}
-        path: output
+        path: build
         
     - name: Docker login
       run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
@@ -71,4 +76,4 @@ jobs:
       run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
 
     - name: test
-      run: docker exec builder bash -c 'pwd && ls -l && cd output && make test'
+      run: docker exec builder bash -c 'pwd && ls -l && cd build && make test'
