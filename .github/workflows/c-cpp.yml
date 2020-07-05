@@ -33,10 +33,10 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Pull image
-        run: docker pull "docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:a84"
+        run: docker pull "docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest"
 
       - name: Run image
-        run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:a84
+        run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
 
       - name: Make
         run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
@@ -49,15 +49,26 @@ jobs:
           name: firmware-${{ env.FIRMWARE_VERSION }}
           path: output
   
-#   test:
-#     runs-on: ubuntu-latest
-#     needs: build
+  test:
+    runs-on: ubuntu-latest
+    needs: build
   
-#     steps:
-#     - uses: actions/checkout@v2
-#     - uses: actions/download-artifact@master
-#       with:
-#         name: firmware-${{ env.FIRMWARE_VERSION }}
-#         path: output
-#     - name: test
-#       run: docker exec builder bash -c 'cp -r build output'
+    steps:
+    - uses: actions/download-artifact@master
+      with:
+        name: firmware-${{ env.FIRMWARE_VERSION }}
+        path: output
+        
+    - name: Docker login
+      run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    - name: Pull image
+      run: docker pull "docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest"
+
+    - name: Run image
+      run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
+
+    - name: test
+      run: docker exec builder bash -c 'pwd && ls -l && cd output && make test'
