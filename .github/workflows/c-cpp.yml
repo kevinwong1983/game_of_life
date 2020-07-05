@@ -8,43 +8,39 @@ on:
 
 jobs:
   
-#   docker_image_build:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v1
-#     - name: package docker
-#       run: |
-#         docker login docker.pkg.github.com --username $GITHUB_ACTOR --password $GITHUB_TOKEN
-#         docker build . --file tools/Dockerfile --tag docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
-#         docker push docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
-#       env:
-#         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-#         CI: true
+  docker_image_build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: package docker
+      run: |
+        docker login docker.pkg.github.com --username $GITHUB_ACTOR --password $GITHUB_TOKEN
+        docker build . --file tools/Dockerfile --tag docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
+        docker push docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        CI: true
         
   build:
-#     needs: docker_image_build
+    needs: docker_image_build
     runs-on: ubuntu-latest
-    container: 
-      image: docker.pkg.github.com/kevinwong1983/game_of_life/dockerfile:latest
+
     steps:
       - uses: actions/checkout@v2
-        
+
+      - name: Docker login
+        run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Pull image
+        run: docker pull "docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest"
+
+      - name: Run image
+        run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
+
       - name: Make
-        run: pwd && ls -l && mkdir build && cd build && cmake .. && make -j8
-      
-#       - name: Docker login
-#         run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
-#         env:
-#           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-#       - name: Pull image
-#         run: docker pull "docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest"
-
-#       - name: Run image
-#         run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
-
-#       - name: Make
-#         run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
+        run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
       
       - name: Save artifact
         run: docker exec builder bash -c 'cp -r build output'
