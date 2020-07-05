@@ -8,24 +8,24 @@ on:
 
 jobs:
   
-  docker_image_build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: package docker
-      run: |
-        docker login docker.pkg.github.com --username $GITHUB_ACTOR --password $GITHUB_TOKEN
-        docker build . --file tools/Dockerfile --tag docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
-        docker push docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        CI: true
+#   docker_image_build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v1
+#     - name: package docker
+#       run: |
+#         docker login docker.pkg.github.com --username $GITHUB_ACTOR --password $GITHUB_TOKEN
+#         docker build . --file tools/Dockerfile --tag docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
+#         docker push docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
+#       env:
+#         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+#         CI: true
         
   build:
     needs: docker_image_build
     runs-on: ubuntu-latest
     container: 
-      image: docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
+      image: docker.pkg.github.com/kevinwong1983/game_of_life/dockerfile:latest
     steps:
       - uses: actions/checkout@v2
         
