@@ -18,17 +18,22 @@ jobs:
           image-name: Dockerfile
           dockerfile-location: tools
           tag: latest
-  
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        
-      - name: docker run  
-        uses: 'docker.pkg.github.com/kevinwong1983/game_of_life/dockerfile:latest'
-#         with:
-#           repo-token: ${{ secrets.GITHUB_TOKEN }}
  
+      - name: Docker login
+        run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Pull Docker image
+        run: docker pull "docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest"
+
+      - name: Run image
+        run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
+
       - name: Make
         run: pwd && ls -l && mkdir build && cd build && cmake .. && make -j8
       
