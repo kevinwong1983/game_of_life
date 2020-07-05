@@ -7,17 +7,17 @@ on:
     branches: [ master ]
 
 jobs:
-  build_build_push_docker:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build, Tag, Push Docker
-        uses: mattdavis0351/actions/docker-gpr@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          image-name: Dockerfile
-          dockerfile-location: tools
-          tag: latest
+#   build_build_push_docker:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Build, Tag, Push Docker
+#         uses: mattdavis0351/actions/docker-gpr@v1
+#         with:
+#           repo-token: ${{ secrets.GITHUB_TOKEN }}
+#           image-name: Dockerfile
+#           dockerfile-location: tools
+#           tag: latest
   build:
     runs-on: ubuntu-latest
     steps:
@@ -29,10 +29,10 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Pull Docker image
-        run: docker pull "docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest"
+        run: docker pull "docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:a84"
 
       - name: Run image
-        run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
+        run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:a84
 
       - name: Make
         run: pwd && ls -l && mkdir build && cd build && cmake .. && make -j8
