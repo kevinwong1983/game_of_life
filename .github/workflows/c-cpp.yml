@@ -53,30 +53,30 @@ jobs:
           name: firmware-$(date +%s)
           path: output
   
-  test:
-    runs-on: ubuntu-latest
-    needs: build
+#   test:
+#     runs-on: ubuntu-latest
+#     needs: build
   
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/download-artifact@master
-      with:
-        name: firmware-${{ env.FIRMWARE_VERSION }}
-        path: build
+#     steps:
+#     - uses: actions/checkout@v2
+#     - uses: actions/download-artifact@master
+#       with:
+#         name: firmware-${{ env.FIRMWARE_VERSION }}
+#         path: build
         
-    - name: Docker login
-      run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+#     - name: Docker login
+#       run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
+#       env:
+#         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-    - name: Pull image
-      run: docker pull "docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest"
+#     - name: Pull image
+#       run: docker pull "docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest"
 
-    - name: Run image
-      run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
+#     - name: Run image
+#       run: docker run -it -d --name builder -v $GITHUB_WORKSPACE:/workspace -w /workspace docker.pkg.github.com/$GITHUB_REPOSITORY/dockerfile:latest
 
-    - name: check for mosquitto
-      run: docker exec builder bash -c 'ls -l /usr/sbin/'
+#     - name: check for mosquitto
+#       run: docker exec builder bash -c 'ls -l /usr/sbin/'
       
-    - name: test
-      run: docker exec builder bash -c 'pwd && ls -l && cd build && make test'
+#     - name: test
+#       run: docker exec builder bash -c 'pwd && ls -l && cd build && make test'
