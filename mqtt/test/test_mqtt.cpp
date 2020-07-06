@@ -24,7 +24,7 @@ public:
 private:
     void fire_up_mosquitto_broker() {
         if ((process_id_ = fork()) == 0) {
-            char app[] = "/usr/local/sbin/mosquitto";
+            char app[] = "/usr/sbin/mosquitto";
             char *const argv[] = {app, NULL};
             execv(app, argv);
         }
