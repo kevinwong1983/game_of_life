@@ -42,12 +42,15 @@ jobs:
       - name: Make
         run: docker exec builder bash -c 'pwd && ls -l && mkdir build && cd build && cmake .. && make -j8'
       
+      - name: test
+        run: docker exec builder bash -c 'pwd && ls -l && cd build && make test'
+      
       - name: Save artifact
         run: docker exec builder bash -c 'cp -r build output'
         
       - uses: actions/upload-artifact@master
         with:
-          name: firmware-${{ env.FIRMWARE_VERSION }}
+          name: firmware-$(date +%s)
           path: output
   
   test:
